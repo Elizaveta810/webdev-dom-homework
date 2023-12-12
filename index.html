@@ -44,26 +44,28 @@
 
     //Дата
     const formatDateTime = (date) => {
-    let dateTime = new Date(date);
-    const day = String(dateTime.getDate()).padStart(2, '0');
-    const month = String(dateTime.getMonth()).padStart(2, '0');
-    const year = String(dateTime.getFullYear() - 2000);
-    const minutes = String(dateTime.getMinutes()).padStart(2, '0');
-    const hours = String(dateTime.getHours()).padStart(2, '0');
-    return `${day}.${month}.${year} ${hours}:${minutes}`;
-  };
+      let dateTime = new Date(date);
+      const day = String(dateTime.getDate()).padStart(2, "0");
+      const month = String(dateTime.getMonth()).padStart(2, "0");
+      const year = String(dateTime.getFullYear() - 2000);
+      const minutes = String(dateTime.getMinutes()).padStart(2, "0");
+      const hours = String(dateTime.getHours()).padStart(2, "0");
+      return `${day}.${month}.${year} ${hours}:${minutes}`;
+    };
 
     //Получаем comments из хранилища комента через API (метод GET)
     function getComments() {
       let fetchPromise = fetch(urlApi, {
         method: "GET",
-      }).then((response) => {
+      })
+        .then((response) => {
           return response.json();
-        }).then((responseData) => {
+        })
+        .then((responseData) => {
           comments = responseData.comments.map((comment) => {
             return {
               name: comment.author.name,
-              date: formatDateTime(comment.date), 
+              date: formatDateTime(comment.date),
               id: comment.id,
               isLiked: comment.isLiked,
               likes: comment.likes,
@@ -73,12 +75,9 @@
           console.log(comments);
           renderComment();
         });
-    };
+    }
 
     getComments();
-
-
-
 
     //Массив обьектов
     let comments = [
@@ -172,7 +171,7 @@
       /*zero(currentDate.getDate()) + "." + zero(currentDate.getMonth() + 1) + "." + currentDate.getFullYear() % 100 + " " +
         zero(currentDate.getHours()) + ":" + zero(currentDate.getMinutes())
     }; */
- 
+
     //Проверка, что поля ввода имени не пустые
 
     nameInputElement.addEventListener("input", () => {
@@ -200,28 +199,62 @@
         addFormButtonElement.disabled = false;
       }
     });
-//Добавление нового комментария через API.(метод POST)
-function postComments() {
+    //Добавление нового комментария через API.(метод POST)
+   /*  function postComments() {
       return fetch(urlApi, {
         method: "POST",
         body: JSON.stringify({
           name: nameInputElement.value,
           text: textInputElement.value,
-          date: formatDateTime(new Date), 
+          date: formatDateTime(new Date()),
           likes: 0,
-          isLiked: false, 
-        })
-      }).then((response) => {
+          isLiked: false,
+        }),
+      })
+        .then((response) => {
           return response.json();
-        }).then((responseData) => {
+        })
+        .then((responseData) => {
           return getComments();
           console.log(comments);
-          
         });
-    };
-
-
-
+    } */
+    //Цепочка Promise
+    function postComments() {
+      return fetch(urlApi, {
+        method: "POST",
+        body: JSON.stringify({
+          name: nameInputElement.value,
+          text: textInputElement.value,
+          date: formatDateTime(new Date()),
+          likes: 0,
+          isLiked: false,
+        }),
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((responseData) => {
+          return getComments();
+        })
+        .then((response) => {
+          return response.json();
+        })
+        .then((responseData) => {
+          comments = responseData.comments.map((comment) => {
+            return {
+              name: comment.author.name,
+              date: formatDateTime(comment.date),
+              id: comment.id,
+              isLiked: comment.isLiked,
+              likes: comment.likes,
+              text: comment.text,
+            };
+          });
+          console.log(comments);
+          renderComment();
+        });
+    }
 
     //Новый коментарий
 
@@ -245,7 +278,6 @@ function postComments() {
       textInputElement.value = "";
       nameInputElement.value = "";
       renderComment();
-
     };
 
     addFormButtonElement.addEventListener("click", addNewComment);
