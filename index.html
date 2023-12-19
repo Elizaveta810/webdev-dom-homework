@@ -154,8 +154,8 @@
 
     //При клике на кнопку НАПИСАТЬ, форму ввода комментария убираем, а ЛОАДЕР загрузки включаем
     addFormButtonElement.addEventListener("click", () => {
-    loadingCommentEl.style.display = "block";
-    form.style.display = "none";
+      loadingCommentEl.style.display = "block";
+      form.style.display = "none";
 
       //Безопастное введение replace
       const protectinHtml = (string) => {
@@ -172,16 +172,49 @@
         body: JSON.stringify({
           name: protectinHtml(nameInputElement.value),
           text: protectinHtml(textInputElement.value),
+          forceError: true,
         }),
       })
         .then((response) => {
-          return response.json();
+          console.log(response);
+            if (response.status === 201) {
+            return response.json();            
+          }
+           if (response.status === 400) {
+            throw new Error("Неверный запрос");
+          }
+          if (response.status === 500) {
+            throw new Error("Сервер упал");
+          }
+          //return response.json();
         })
-        .then((responseData) => {
-          return getComments();
-        });
-      renderComment();
-      getComments();
+         .then((responseData) => {
+          comments = responseData.comments
+          addFormButtonElement.disabled = false;
+          textInputElement.value = "";
+          nameInputElement.value = "";
+          getComments();
+        })
+       
+         .catch((error) => {
+          addFormButtonElement.disabled = false;
+          if (error.message === "Неверный запрос") {
+            alert("Имя и комментарий должны быть не короче 3 символов");
+          //  return
+          } if (error.message === "Сервер упал") {
+            //alert("Кажется, что-то пошло не так, попробуйте позже");
+            getComments();
+          }  if (error.message === "Failed to fetch") {
+            alert("Кажется, сломался интернет, попробуйте позже");
+           
+          } 
+          //TODO: Отправлять в систему сбора ошибок
+          
+          renderComment();
+          //Пробуем снова, если сервер сломался
+          
+        })
+     //renderComment();
     });
 
     //Счетчик лайков
@@ -283,7 +316,5 @@
       });*/
 
     getComments();
-
-    
   </script>
 </html>
