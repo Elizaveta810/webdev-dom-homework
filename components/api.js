@@ -1,8 +1,3 @@
-
-
-
-
-
 let urlApi = "https://wedev-api.sky.pro/api/v2/zudina/comments";
 const userUrl = "https://wedev-api.sky.pro/api/user/login";
 const userUrlReg = "https://wedev-api.sky.pro/api/user";

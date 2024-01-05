@@ -168,7 +168,7 @@ const initLikeListeners = () => {
     likeButton.addEventListener("click", (event) => {
       event.stopPropagation();
       if (!token) {
-        alert ('Авторизуйтесь')
+        alert ('Пожалуйста авторизируйтесь!')
         return
       }
       const index = likeButton.dataset.index;

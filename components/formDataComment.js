@@ -1,8 +1,3 @@
-
-
-
-
-
 export const formDataComment = (commentDate) => {
   const dateComment = new Date(commentDate);
  const formatDate =
