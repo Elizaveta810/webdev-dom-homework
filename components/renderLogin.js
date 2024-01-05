@@ -82,7 +82,7 @@ export const renderRegin = () => {
 
   regButtonElement.addEventListener("click", () => {
     if (!loginInputElement.value || !passwordInputElement.value || !nameInputElement.value) {
-      alert("Проверьте оба поля  на заполненность");
+      alert("Проверьте  поля  ввода");
       return
     }
     register({
