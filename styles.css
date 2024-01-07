@@ -144,3 +144,62 @@ body {
   .emptyTextName {
     background: #c2fd92;
   }
+
+
+
+  .add-form {
+    padding: 20px;
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .add-form-name,
+  .add-form-text,
+  .form-password,
+  .form-name 
+   {
+    font-size: 16px;
+    font-family: Helvetica;
+    border-radius: 8px;
+    border: none;
+  }
+
+  .add-form-name {
+    width: 300px;
+    padding: 11px 22px;
+  }
+  
+  .add-form-text,
+  .form-password,
+  .form-name {
+    margin-top: 12px;
+    padding: 22px;
+    resize: none;
+  }
+  .form-password,
+  .form-name {
+    background-color: #f1fad1;
+  }
+  .reg {
+
+    margin-top: 22px;
+    margin-bottom: 12px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 24px;
+    border: none;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+
+  .log-form-button {
+    margin-top: 24px;
+    font-size: 24px;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #bcec30;
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+  }

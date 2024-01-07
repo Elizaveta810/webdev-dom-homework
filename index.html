@@ -7,36 +7,8 @@
   </head>
 
   <body>
-    <div class="container">
-      <ul class="comments" id="comments"></ul>
-      <div id="loadingText">
-        <!--При загрузке страницы появляется сообщение, еще не загружая ленту комментария-->
-        <p>Пожалуйста подождите, загружается лента комментарий</p>
-      </div>
-      <div class="add-form" id="add-form">
-        <input
-          id="add-form-name"
-          type="text"
-          class="add-form-name"
-          placeholder="Введите ваше имя"
-        />
-        <textarea
-          id="add-form-text"
-          type="textarea"
-          class="add-form-text"
-          placeholder="Введите ваш коментарий"
-          rows="4"
-        ></textarea>
-        <div class="add-form-row">
-          <button class="add-form-button empty" id="add-form-button" disabled>
-            Написать
-          </button>
-        </div>
-      </div>
-      <div class="add-form-loading" id="loadingComment">
-        <!--При добавлении нового комментария форма ввода исчезает, выходит сообщение для пользователя-->
-        <p>Комментарий добавляется ...</p>
-      </div>
+    <div id="app">
+      <div class="container" id="loadingText" >Пожалуйста ожидайте, комментарии загружаются...</div>
     </div>
     </body>
     <script type="module" src="main.js"></script>
