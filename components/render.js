@@ -1,6 +1,7 @@
 import {comments, fetchAndRenderComments, user} from "../main.js";
 import { renderLogin} from "./renderLogin.js";
 import { postComment, token } from "./api.js";
+import { format } from "date-fns";
 
 
 const sanitizeHtml = (htmlString) => {
@@ -15,10 +16,11 @@ export const renderComment = () => {
 //Добавление Разметки списка комментариев(лента всех комментариев)
   const commentHtml = comments
     .map((comment, index) => {
+      const createDate = format(new Date(comment.date), 'yyyy-MM-dd hh.mm.ss')
       return `<li class="comment" data-index="${index}">
   <div class="comment-header">
     <div>${comment.name}</div>
-      <div>${comment.date}</div>
+      <div>${createDate}</div>
   </div>
     <div class="comment-body">
       <div class="comment-text">

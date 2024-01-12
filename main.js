@@ -1,6 +1,7 @@
 import { getComments} from "./components/api.js";
 import { formDataComment } from "./components/formDataComment.js";
 import { renderComment } from "./components/render.js";
+import { format } from "date-fns";
 
 export let user = null;
 export const setUser = (newUser) => {
